@@ -2,16 +2,7 @@ use axum::{routing::get, Router};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let debug = false;
-    let addr = (
-        [127, 0, 0, 1],
-        if debug {
-            3000
-        } else {
-            iis::get_port().parse()?
-        },
-    )
-        .into();
+    let addr = ([127, 0, 0, 1], 3000).into();
 
     axum::Server::bind(&addr)
         .serve(
